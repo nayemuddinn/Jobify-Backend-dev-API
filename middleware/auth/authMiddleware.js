@@ -1,6 +1,6 @@
 const User = require('../../db/models/user')
 const jwt = require('jsonwebtoken')
-const { UnauthenticatedError } = require('../errors')
+const { UnauthenticatedError } = require('../../errors')
 
 
 const auth = async (req, res, next) => {
