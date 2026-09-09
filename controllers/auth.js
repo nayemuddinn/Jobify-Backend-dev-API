@@ -7,7 +7,11 @@ const login = async (req, res) => {
 }
 
 const registration = async (req, res) => {
-
+    const user = await User.create({ ...req.body })
+    const token = user.createJWT()
+    res.status(StatusCodes.CREATED).json({
+        user: { name: user.name }, token
+    })
 }
 
 module.exports = { login, registration }
