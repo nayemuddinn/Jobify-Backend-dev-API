@@ -10,7 +10,7 @@ const authenticateUser = require('./middleware/auth/authMiddleware');
 const PORT = process.env.PORT
 
 const errorHandlerMiddleware = require('./middleware/errorHandler/error-handler')
-
+const addressNotFoundMiddleware = require('./middleware/errorHandler/Address-not-found')
 
 app.use(express.json());
 
@@ -19,6 +19,7 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/job', authenticateUser, jobRouter);
 
 app.use(errorHandlerMiddleware)
+app.use(addressNotFoundMiddleware)
 
 const start = async () => {
     try {
