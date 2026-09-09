@@ -1,22 +1,23 @@
 const User = require('../db/models/user')
 const { StatusCodes } = require('http-status-codes')
+const { BadRequestError, UnauthenticatedError } = require('../errors')
 
 const login = async (req, res) => {
     const { email, password } = req.body
 
     if (!email || !password) {
-        ;//will throw error
+        throw new BadRequestError('Please provide email and password')
     }
 
     const user = await User.findOne({ email })
     if (!user) {
-        ;//will throw error
+        throw new UnauthenticatedError('Invalid Credentials')
     }
 
     const validPass = await user.comparePassword(password)
 
     if (!validPass) {
-        ;//will throw errors
+        throw new UnauthenticatedError('Invalid Credentials')
     }
 
     const token = user.createJWT()
