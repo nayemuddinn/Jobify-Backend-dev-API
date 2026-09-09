@@ -21,14 +21,13 @@ const addressNotFoundMiddleware = require('./middleware/errorHandler/Address-not
 
 app.use(
     rateLimiter({
-        windowMs: 10 * 60 * 1000, // 15 minutes
+        windowMs: 10 * 60 * 1000,
         max: 10,
     })
 );
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
-app.use(xss());
 
 
 app.use('/api/v1/auth', authRouter);
